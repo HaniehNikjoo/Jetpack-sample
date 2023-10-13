@@ -50,7 +50,7 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun NewsList(
     data: Flow<PagingData<Article>>,
-    onItemClicked: ((String) -> Unit)? = null,
+    onItemClicked: ((Article) -> Unit)? = null,
 ) {
     val listState: LazyListState = rememberLazyListState()
     val items: LazyPagingItems<Article> = data.collectAsLazyPagingItems()
@@ -120,7 +120,7 @@ fun NewsList(
 
 @Composable
 fun NewsItem(
-    item: Article? = null, onItemClicked: ((String) -> Unit)? = null
+    item: Article? = null, onItemClicked: ((Article) -> Unit)? = null
 ) {
     Row(
         Modifier
@@ -129,7 +129,7 @@ fun NewsItem(
             .border(2.dp, Color(0xFF222222))
             .padding(vertical = 5.dp)
             .clickable {
-//                item?.let { onItemClicked?.invoke(it.) }
+                item?.let { onItemClicked?.invoke(item) }
             }) {
 
         AsyncImage(
@@ -164,7 +164,7 @@ fun NewsItem(
 
             Row {
                 Text(
-                    text = item?.author ?: "unknown",
+                    text = Utils.getAuthorValue(item?.author),
                     color = Color.LightGray,
                     fontSize = 12.sp,
                     style = TextStyle(

@@ -1,4 +1,4 @@
-package ir.mahsan.challenge.view.ui
+package ir.mahsan.challenge.view.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.font.Font
