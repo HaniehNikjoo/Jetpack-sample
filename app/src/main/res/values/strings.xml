@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Mahsan</string>
+    <string name="title">Latest News</string>
+    <string name="not_found_items">Nothing found</string>
+</resources>
