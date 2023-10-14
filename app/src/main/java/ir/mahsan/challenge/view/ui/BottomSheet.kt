@@ -1,5 +1,6 @@
 package ir.mahsan.challenge.view.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -19,8 +20,9 @@ fun BottomSheet(item: Article, onDismiss: () -> Unit) {
         onDismissRequest = { onDismiss() },
         sheetState = modalBottomSheetState,
         dragHandle = { BottomSheetDefaults.DragHandle() },
-        containerColor = Color(0xFF708090),
+        containerColor = Color(0xFF303031),
         tonalElevation = BottomSheetDefaults.SheetPeekHeight,
+        modifier = Modifier.background(Color(0x80202020))
     ) {
         NewsDetail(item = item)
     }

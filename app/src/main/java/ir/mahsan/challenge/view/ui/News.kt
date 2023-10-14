@@ -22,6 +22,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -29,6 +34,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -45,6 +51,7 @@ import ir.mahsan.challenge.R
 import ir.mahsan.challenge.model.dto.Article
 import ir.mahsan.challenge.util.Utils
 import ir.mahsan.challenge.util.timeAgo
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 
 @Composable
@@ -54,6 +61,13 @@ fun NewsList(
 ) {
     val listState: LazyListState = rememberLazyListState()
     val items: LazyPagingItems<Article> = data.collectAsLazyPagingItems()
+    var isLoading by remember {
+        mutableStateOf(true)
+    }
+    LaunchedEffect(key1 = true) {
+        delay(5000)
+        isLoading = false
+    }
     Column {
         Header(title = stringResource(R.string.title))
         Box(
@@ -100,8 +114,13 @@ fun NewsList(
                     content = {
                         items(items.itemCount) { index ->
                             items[index]?.let {
-                                NewsItem(
-                                    it, onItemClicked = onItemClicked
+                                ShimmerListItem(
+                                    isLoading = isLoading,
+                                    contentAfterLoading = {
+                                        NewsItem(
+                                            it, onItemClicked = onItemClicked
+                                        )
+                                    }
                                 )
                             }
                         }
@@ -136,6 +155,8 @@ fun NewsItem(
             model = item?.urlToImage,
             contentDescription = null,
             contentScale = ContentScale.Crop,
+            error = painterResource(R.drawable.ic_place_holder),
+            placeholder = painterResource(R.drawable.ic_place_holder),
             modifier = Modifier
                 .height(120.dp)
                 .width(120.dp)

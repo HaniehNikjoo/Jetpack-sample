@@ -33,7 +33,7 @@ fun NewsDetail(item: Article) {
 
     Column(
         modifier = Modifier
-            .background(Color(0xFF708090))
+            .background(Color(0xFF303031))
             .fillMaxSize()
             .padding(20.dp),
     ) {
