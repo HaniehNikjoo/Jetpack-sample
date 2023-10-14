@@ -7,13 +7,10 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -35,6 +32,8 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import ir.mahsan.challenge.R
 import ir.mahsan.challenge.model.dto.Article
 import ir.mahsan.challenge.util.getMessageError
+import ir.mahsan.challenge.view.ui.theme.LocalDim
+import ir.mahsan.challenge.view.ui.theme.MahsanTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 
@@ -49,8 +48,9 @@ fun NewsList(
         mutableStateOf(true)
     }
     LaunchedEffect(key1 = true) {
-        delay(5000)
-        isLoading = false
+        // Put a fixed delay just to show the skeleton
+        delay(3000)
+        isLoading = items.itemCount == 0 && items.loadState.refresh == LoadState.Loading
     }
     Column {
         Header(title = stringResource(R.string.title))
@@ -88,14 +88,14 @@ fun NewsList(
             } else Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color(0xFF222222))
+                    .background(MahsanTheme.colors.background)
             ) {
                 LazyColumn(state = listState,
                     modifier = Modifier
                         .wrapContentHeight()
                         .fillMaxWidth()
-                        .background(color = Color(0xFF222222))
-                        .padding(horizontal = 20.dp)
+                        .background(MahsanTheme.colors.background)
+                        .padding(horizontal = LocalDim.current.spaceLarge)
                         .align(Alignment.Center),
                     content = {
                         items(items.itemCount) { index ->
@@ -112,13 +112,6 @@ fun NewsList(
                         }
                     })
             }
-            if (items.itemCount == 0 && items.loadState.refresh == LoadState.Loading) CircularProgressIndicator(
-                modifier = Modifier
-                    .size(60.dp)
-                    .padding(10.dp)
-                    .align(Alignment.Center)
-                    .wrapContentSize(), color = Color.White
-            )
         }
     }
 }

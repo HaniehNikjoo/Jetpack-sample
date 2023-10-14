@@ -14,17 +14,19 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ir.mahsan.challenge.R
 import ir.mahsan.challenge.model.dto.Article
 import ir.mahsan.challenge.util.getAuthorValue
 import ir.mahsan.challenge.util.timeAgo
+import ir.mahsan.challenge.view.ui.theme.LocalDim
 import ir.mahsan.challenge.view.ui.theme.MahsanTheme
 
 @Composable
@@ -33,13 +35,13 @@ fun NewsDetail(item: Article) {
 
     Column(
         modifier = Modifier
-            .background(Color(0xFF303031))
+            .background(MahsanTheme.colors.secondBackground)
             .fillMaxSize()
-            .padding(20.dp),
+            .padding(LocalDim.current.spaceLarge),
     ) {
         Text(
             text = item.title,
-            color = Color.White,
+            color = MahsanTheme.colors.title,
             style = TextStyle(
                 fontWeight = FontWeight.Bold,
                 lineHeight = 28.sp
@@ -54,7 +56,7 @@ fun NewsDetail(item: Article) {
         Row {
             Text(
                 text = getAuthorValue(item.author),
-                color = Color.LightGray,
+                color = MahsanTheme.colors.text,
                 fontSize = 12.sp,
                 style = TextStyle(
                     fontWeight = FontWeight.Normal
@@ -62,30 +64,30 @@ fun NewsDetail(item: Article) {
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .fillMaxWidth(.60f)
-                    .padding(10.dp),
+                    .padding(LocalDim.current.spaceNormal),
                 textAlign = TextAlign.Center,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
             Text(
                 text = timeAgo(item.publishedAt) ?: "",
-                color = Color.LightGray,
+                color = MahsanTheme.colors.text,
                 style = TextStyle(
                     fontWeight = FontWeight.Normal
                 ),
                 fontSize = 12.sp,
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
-                    .padding(10.dp),
+                    .padding(LocalDim.current.spaceNormal),
                 textAlign = TextAlign.Center,
             )
         }
 
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(LocalDim.current.spaceNormal))
 
         Text(
-            text = "Description",
-            color = Color.White,
+            text = stringResource(id = R.string.description),
+            color = MahsanTheme.colors.title,
             style = TextStyle(
                 fontWeight = FontWeight.Bold,
                 lineHeight = 20.sp
@@ -96,20 +98,20 @@ fun NewsDetail(item: Article) {
 
         Text(
             text = item.description,
-            color = Color.LightGray,
+            color = MahsanTheme.colors.text,
             style = TextStyle(
                 fontWeight = FontWeight.Normal,
                 lineHeight = 20.sp
             ),
-            fontSize = 14.sp,
+            fontSize = 12.sp,
             modifier = Modifier
-                .padding(bottom = 8.dp),
+                .padding(bottom = 8.dp, top = 4.dp),
             textAlign = TextAlign.Start,
         )
 
         Text(
-            text = "Content",
-            color = Color.White,
+            text = stringResource(id = R.string.content),
+            color = MahsanTheme.colors.title,
             style = TextStyle(
                 fontWeight = FontWeight.Bold,
                 lineHeight = 20.sp
@@ -120,12 +122,14 @@ fun NewsDetail(item: Article) {
 
         Text(
             text = item.content,
-            color = Color.LightGray,
+            color = MahsanTheme.colors.text,
             style = TextStyle(
                 fontWeight = FontWeight.Normal,
                 lineHeight = 20.sp
             ),
-            fontSize = 14.sp,
+            modifier = Modifier
+                .padding(top = 4.dp),
+            fontSize = 12.sp,
             textAlign = TextAlign.Start,
         )
 
@@ -135,13 +139,13 @@ fun NewsDetail(item: Article) {
             },
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = MahsanTheme.colors.primary,
-                contentColor = Color.White,
+                contentColor = MahsanTheme.colors.title,
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 20.dp)
+                .padding(vertical = LocalDim.current.spaceLarge)
         ) {
-            Text(text = "Read More")
+            Text(text = stringResource(id = R.string.read_more))
         }
     }
 }

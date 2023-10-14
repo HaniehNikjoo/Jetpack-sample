@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
@@ -31,6 +30,8 @@ import ir.mahsan.challenge.R
 import ir.mahsan.challenge.model.dto.Article
 import ir.mahsan.challenge.util.getAuthorValue
 import ir.mahsan.challenge.util.timeAgo
+import ir.mahsan.challenge.view.ui.theme.LocalDim
+import ir.mahsan.challenge.view.ui.theme.MahsanTheme
 
 @Composable
 fun NewsItem(
@@ -40,8 +41,8 @@ fun NewsItem(
         Modifier
             .testTag("NewsItem")
             .wrapContentSize()
-            .border(2.dp, Color(0xFF222222))
-            .padding(vertical = 5.dp)
+            .border(2.dp, MahsanTheme.colors.background)
+            .padding(vertical = LocalDim.current.spaceSmall)
             .clickable {
                 item?.let { onItemClicked?.invoke(item) }
             }) {
@@ -53,11 +54,11 @@ fun NewsItem(
             error = painterResource(R.drawable.ic_place_holder),
             placeholder = painterResource(R.drawable.ic_place_holder),
             modifier = Modifier
-                .height(120.dp)
-                .width(120.dp)
+                .height(LocalDim.current.spaceXLarge)
+                .width(LocalDim.current.spaceXLarge)
                 .align(CenterVertically)
-                .padding(10.dp)
-                .clip(RoundedCornerShape(10.dp)))
+                .padding(LocalDim.current.spaceNormal)
+                .clip(RoundedCornerShape(LocalDim.current.spaceNormal)))
 
         Column(
             modifier = Modifier
@@ -65,7 +66,7 @@ fun NewsItem(
         ) {
             Text(
                 text = item?.title ?: "",
-                color = Color.White,
+                color = MahsanTheme.colors.title,
                 style = TextStyle(
                     fontWeight = FontWeight.Bold,
                     lineHeight = 20.sp
@@ -73,7 +74,8 @@ fun NewsItem(
                 fontSize = 16.sp,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .padding(10.dp),
+                    .padding(LocalDim.current.spaceNormal),
+                maxLines = 3,
                 textAlign = TextAlign.Start,
                 overflow = TextOverflow.Ellipsis
             )
@@ -81,7 +83,7 @@ fun NewsItem(
             Row {
                 Text(
                     text = getAuthorValue(item?.author),
-                    color = Color.LightGray,
+                    color = MahsanTheme.colors.text,
                     fontSize = 12.sp,
                     style = TextStyle(
                         fontWeight = FontWeight.Normal
@@ -89,7 +91,7 @@ fun NewsItem(
                     modifier = Modifier
                         .align(CenterVertically)
                         .fillMaxWidth(.60f)
-                        .padding(10.dp),
+                        .padding(LocalDim.current.spaceNormal),
                     textAlign = TextAlign.Start,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -97,14 +99,14 @@ fun NewsItem(
                 timeAgo(item?.publishedAt ?: "")?.let {
                     Text(
                         text = it,
-                        color = Color.LightGray,
+                        color = MahsanTheme.colors.text,
                         style = TextStyle(
                             fontWeight = FontWeight.Normal
                         ),
                         fontSize = 12.sp,
                         modifier = Modifier
                             .align(CenterVertically)
-                            .padding(10.dp),
+                            .padding(LocalDim.current.spaceNormal),
                         textAlign = TextAlign.Start,
                     )
                 }

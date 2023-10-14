@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         @SuppressLint("SourceLockedOrientationActivity")
+        // Lock orientation to portrait
         requestedOrientation =
             ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)

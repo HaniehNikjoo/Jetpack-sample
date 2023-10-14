@@ -2,7 +2,6 @@ package ir.mahsan.challenge.view.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
@@ -16,13 +15,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ir.mahsan.challenge.view.ui.theme.MahsanTheme
 
 @Composable
 fun Header(title: String) {
     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
         Row(
             Modifier
-                .background(Color(0xFF1B7272))
+                .background(MahsanTheme.colors.primary)
                 .padding(horizontal = 12.dp, vertical = 16.dp)
                 .fillMaxWidth()
         ) {
