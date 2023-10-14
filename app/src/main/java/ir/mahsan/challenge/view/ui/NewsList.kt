@@ -95,7 +95,7 @@ fun NewsList(
                         .wrapContentHeight()
                         .fillMaxWidth()
                         .background(MahsanTheme.colors.background)
-                        .padding(horizontal = LocalDim.current.spaceLarge)
+                        .padding(horizontal = LocalDim.current.spaceSLarge)
                         .align(Alignment.Center),
                     content = {
                         items(items.itemCount) { index ->

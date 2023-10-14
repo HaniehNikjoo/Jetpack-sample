@@ -37,7 +37,7 @@ fun NewsDetail(item: Article) {
         modifier = Modifier
             .background(MahsanTheme.colors.secondBackground)
             .fillMaxSize()
-            .padding(LocalDim.current.spaceLarge),
+            .padding(LocalDim.current.spaceSLarge),
     ) {
         Text(
             text = item.title,
@@ -105,7 +105,7 @@ fun NewsDetail(item: Article) {
             ),
             fontSize = 12.sp,
             modifier = Modifier
-                .padding(bottom = 8.dp, top = 4.dp),
+                .padding(bottom = 8.dp, top = LocalDim.current.spaceSmall),
             textAlign = TextAlign.Start,
         )
 
@@ -128,7 +128,7 @@ fun NewsDetail(item: Article) {
                 lineHeight = 20.sp
             ),
             modifier = Modifier
-                .padding(top = 4.dp),
+                .padding(top = LocalDim.current.spaceSmall),
             fontSize = 12.sp,
             textAlign = TextAlign.Start,
         )
@@ -143,7 +143,7 @@ fun NewsDetail(item: Article) {
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = LocalDim.current.spaceLarge)
+                .padding(vertical = LocalDim.current.spaceSLarge)
         ) {
             Text(text = stringResource(id = R.string.read_more))
         }

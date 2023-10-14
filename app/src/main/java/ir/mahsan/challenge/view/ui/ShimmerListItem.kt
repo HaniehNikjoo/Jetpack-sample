@@ -46,37 +46,37 @@ fun ShimmerListItem(
                     .shimmerEffect()
                     .padding(LocalDim.current.spaceNormal)
             )
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(LocalDim.current.spaceMedium))
             Column(
                 modifier = Modifier.weight(1f)
             ) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(LocalDim.current.spaceLarge)
-                        .padding(top = 5.dp)
+                        .height(LocalDim.current.spaceSLarge)
+                        .padding(top = LocalDim.current.spaceSmall)
                         .shimmerEffect()
                 )
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(LocalDim.current.spaceLarge)
-                        .padding(top = 5.dp)
+                        .height(LocalDim.current.spaceSLarge)
+                        .padding(top = LocalDim.current.spaceSmall)
                         .shimmerEffect()
                 )
                 Spacer(modifier = Modifier.height(12.dp))
-                Row(Modifier.padding(top = 25.dp)) {
+                Row(Modifier.padding(top = LocalDim.current.spaceSLarge)) {
                     Box(
                         modifier = Modifier
                             .fillMaxWidth(0.7f)
-                            .height(LocalDim.current.spaceLarge)
+                            .height(LocalDim.current.spaceSLarge)
                             .shimmerEffect()
                     )
-                    Spacer(modifier = Modifier.width(16.dp))
+                    Spacer(modifier = Modifier.width(LocalDim.current.spaceMedium))
                     Box(
                         modifier = Modifier
                             .fillMaxWidth(0.7f)
-                            .height(LocalDim.current.spaceLarge)
+                            .height(LocalDim.current.spaceSLarge)
                             .shimmerEffect()
                     )
                 }
