@@ -23,7 +23,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ir.mahsan.challenge.model.dto.Article
-import ir.mahsan.challenge.util.Utils.getAuthorValue
+import ir.mahsan.challenge.util.getAuthorValue
 import ir.mahsan.challenge.util.timeAgo
 import ir.mahsan.challenge.view.ui.theme.MahsanTheme
 
@@ -42,9 +42,9 @@ fun NewsDetail(item: Article) {
             color = Color.White,
             style = TextStyle(
                 fontWeight = FontWeight.Bold,
-                lineHeight = 20.sp
+                lineHeight = 28.sp
             ),
-            fontSize = 18.sp,
+            fontSize = 22.sp,
             modifier = Modifier
                 .align(Alignment.CenterHorizontally),
             textAlign = TextAlign.Center,
@@ -105,8 +105,6 @@ fun NewsDetail(item: Article) {
             modifier = Modifier
                 .padding(bottom = 8.dp),
             textAlign = TextAlign.Start,
-            overflow = TextOverflow.Ellipsis,
-            maxLines = 3,
         )
 
         Text(
@@ -127,10 +125,8 @@ fun NewsDetail(item: Article) {
                 fontWeight = FontWeight.Normal,
                 lineHeight = 20.sp
             ),
-            maxLines = 4,
             fontSize = 14.sp,
             textAlign = TextAlign.Start,
-            overflow = TextOverflow.Ellipsis
         )
 
         Button(

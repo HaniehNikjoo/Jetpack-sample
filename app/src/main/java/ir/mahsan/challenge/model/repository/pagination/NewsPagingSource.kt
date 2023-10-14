@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import ir.mahsan.challenge.model.datasource.NewsApiDatasource
 import ir.mahsan.challenge.model.dto.Article
-import ir.mahsan.challenge.model.dto.BaseResponse
 
 class NewsPagingSource(
     private val newsApiService: NewsApiDatasource,
@@ -19,7 +18,7 @@ class NewsPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
         return try {
             val page = params.key ?: 1
-            val response = newsApiService.getList(page = page,pageSize = 10)
+            val response = newsApiService.getList(page = page, pageSize = 10)
 
             LoadResult.Page(
                 data = response.articles,

@@ -24,12 +24,12 @@ android {
     productFlavors {
         production {
             buildConfigField "String", "BASE_URL", "\"https://newsapi.org/v2/\""
-            buildConfigField "String", "API_KEY", "\"36c7e1cc0db246cd8ced3d42fec47522\""
+            buildConfigField "String", "API_KEY", "\"7c689a4b87e94b6394c7863e6245cf72\""
             dimension "version"
         }
         develop {
             buildConfigField "String", "BASE_URL", "\"https://newsapi.org/v2/\""
-            buildConfigField "String", "API_KEY", "\"7c689a4b87e94b6394c7863e6245cf72\""
+            buildConfigField "String", "API_KEY", "\"36c7e1cc0db246cd8ced3d42fec47522\""
             dimension "version"
             applicationIdSuffix ".develop"
             versionNameSuffix "-develop"

@@ -26,7 +26,7 @@ fun ShimmerListItem(
     modifier: Modifier = Modifier
 ) {
     if(isLoading) {
-        Row(modifier = modifier.padding(bottom = 15.dp)) {
+        Row(modifier = modifier.padding(vertical = 15.dp)) {
             Box(
                 modifier = Modifier
                     .size(100.dp)
