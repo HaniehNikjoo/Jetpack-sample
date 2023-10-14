@@ -46,7 +46,7 @@ private val DarkColorPalette = darkColors(
 )
 
 private val LightColorPalette = lightColors(
-    primary = Color(0x0D6EFDEE),
+    primary = Color(0xDF3F0F0),
     primaryVariant = Color(0xEEEEEEEE),
     background = Color.White,
 )

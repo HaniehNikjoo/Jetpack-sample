@@ -138,7 +138,7 @@ fun NewsDetail(item: Article) {
                 uriHandler.openUri(item.url)
             },
             colors = ButtonDefaults.buttonColors(
-                backgroundColor = MahsanTheme.colors.primaryVariant,
+                backgroundColor = MahsanTheme.colors.primary,
                 contentColor = Color.White,
             ),
             modifier = Modifier
