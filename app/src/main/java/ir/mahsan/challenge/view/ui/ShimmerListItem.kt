@@ -30,6 +30,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import ir.mahsan.challenge.view.ui.theme.LocalDim
+import ir.mahsan.challenge.view.ui.theme.Shapes
 
 @Composable
 fun ShimmerListItem(
@@ -42,7 +43,7 @@ fun ShimmerListItem(
             Box(
                 modifier = Modifier
                     .size(100.dp)
-                    .clip(RoundedCornerShape(LocalDim.current.spaceNormal))
+                    .clip(Shapes.medium)
                     .shimmerEffect()
                     .padding(LocalDim.current.spaceNormal)
             )

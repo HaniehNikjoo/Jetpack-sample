@@ -32,6 +32,7 @@ import ir.mahsan.challenge.util.getAuthorValue
 import ir.mahsan.challenge.util.timeAgo
 import ir.mahsan.challenge.view.ui.theme.LocalDim
 import ir.mahsan.challenge.view.ui.theme.MahsanTheme
+import ir.mahsan.challenge.view.ui.theme.Shapes
 
 @Composable
 fun NewsItem(
@@ -58,7 +59,8 @@ fun NewsItem(
                 .width(LocalDim.current.spaceXLarge)
                 .align(CenterVertically)
                 .padding(LocalDim.current.spaceNormal)
-                .clip(RoundedCornerShape(LocalDim.current.spaceNormal)))
+                .clip(Shapes.medium)
+        )
 
         Column(
             modifier = Modifier
