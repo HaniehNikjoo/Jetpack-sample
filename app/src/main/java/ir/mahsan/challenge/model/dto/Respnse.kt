@@ -1,9 +1,11 @@
 package ir.mahsan.challenge.model.dto
 
 import android.os.Parcelable
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
+@Keep
 @Parcelize
 data class ErrorResponse(
     @SerializedName("status") val status: String,
@@ -11,6 +13,7 @@ data class ErrorResponse(
     @SerializedName("message") val message: String,
 ) : Parcelable
 
+@Keep
 @Parcelize
 data class BaseResponse(
     @SerializedName("status") val status: String,

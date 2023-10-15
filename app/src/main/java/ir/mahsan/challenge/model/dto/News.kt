@@ -1,9 +1,11 @@
 package ir.mahsan.challenge.model.dto
 
 import android.os.Parcelable
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
+@Keep
 @Parcelize
 data class ArticleSource(
     @SerializedName("id") val id: String,
@@ -14,7 +16,7 @@ data class ArticleSource(
     @SerializedName("language") val language: String,
     @SerializedName("country") val country: String,
 ): Parcelable
-
+@Keep
 @Parcelize
 data class Article(
     @SerializedName("source") val source: ArticleSource,
