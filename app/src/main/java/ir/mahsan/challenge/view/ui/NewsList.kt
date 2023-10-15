@@ -3,7 +3,6 @@ package ir.mahsan.challenge.view.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,8 +24,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import ir.mahsan.challenge.R
@@ -34,84 +33,97 @@ import ir.mahsan.challenge.model.dto.Article
 import ir.mahsan.challenge.util.getMessageError
 import ir.mahsan.challenge.view.ui.theme.LocalDim
 import ir.mahsan.challenge.view.ui.theme.MahsanTheme
+import ir.mahsan.challenge.viewmodel.MainViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
+
+@Composable
+fun ListingScreen(
+    viewModel: MainViewModel = hiltViewModel()
+) {
+    val items: LazyPagingItems<Article> = viewModel.getList().collectAsLazyPagingItems()
+    Column(
+        modifier = Modifier
+            .testTag("NewsList")
+            .fillMaxSize()
+            .background(Color.DarkGray)
+    ) {
+        Header(title = stringResource(R.string.title))
+        NewsList(items)
+    }
+}
 
 @Composable
 fun NewsList(
-    data: Flow<PagingData<Article>>,
-    onItemClicked: ((Article) -> Unit)? = null,
+    items: LazyPagingItems<Article>,
 ) {
     val listState: LazyListState = rememberLazyListState()
-    val items: LazyPagingItems<Article> = data.collectAsLazyPagingItems()
-    var isLoading by remember {
-        mutableStateOf(true)
-    }
+    var isLoading by remember { mutableStateOf(true) }
     LaunchedEffect(key1 = true) {
-        // Put a fixed delay just to show the skeleton
+        // a fixed delay just to show the skeleton
         delay(3000)
         isLoading = items.itemCount == 0 && items.loadState.refresh == LoadState.Loading
     }
-    Column {
-        Header(title = stringResource(R.string.title))
-        Box(
-            modifier = Modifier
-                .testTag("NewsList")
-                .fillMaxHeight()
-                .background(Color.DarkGray)
-        ) {
-            if (items.itemCount == 0 && items.loadState.refresh != LoadState.Loading) {
-                var message: String? = null
-                items.apply {
-                    when {
-                        loadState.refresh is LoadState.Error -> {
-                            val e = loadState.refresh as LoadState.Error
-                            message = getMessageError(e.error)
-                        }
-                        loadState.append is LoadState.Error -> {
-                            val e = loadState.append as LoadState.Error
-                            message = getMessageError(e.error)
-                        }
-                    }
-                }
-                Text(
-                    text = message ?: stringResource(id = R.string.not_found_items),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .testTag("NewsListEmptyState")
-                        .padding(16.dp)
-                        .fillMaxWidth()
-                        .wrapContentHeight()
-                        .align(Alignment.Center),
-                    color = Color.LightGray
-                )
-            } else Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(MahsanTheme.colors.background)
-            ) {
-                LazyColumn(state = listState,
-                    modifier = Modifier
-                        .wrapContentHeight()
-                        .fillMaxWidth()
-                        .background(MahsanTheme.colors.background)
-                        .padding(horizontal = LocalDim.current.spaceMedium)
-                        .align(Alignment.Center),
-                    content = {
-                        items(items.itemCount) { index ->
-                            items[index]?.let {
-                                ShimmerListItem(
-                                    isLoading = isLoading,
-                                    contentAfterLoading = {
-                                        NewsItem(
-                                            it, onItemClicked = onItemClicked
-                                        )
-                                    }
-                                )
-                            }
-                        }
-                    })
-            }
+
+    lateinit var article: Article
+    var isBottomSheetVisible by remember { mutableStateOf(false) }
+    if (isBottomSheetVisible) {
+        BottomSheet(article) {
+            isBottomSheetVisible = false
         }
     }
+
+    Box {
+        if (items.itemCount == 0 && items.loadState.refresh != LoadState.Loading) {
+            var message: String? = null
+            items.apply {
+                when {
+                    loadState.refresh is LoadState.Error -> {
+                        val e = loadState.refresh as LoadState.Error
+                        message = getMessageError(e.error)
+                    }
+
+                    loadState.append is LoadState.Error -> {
+                        val e = loadState.append as LoadState.Error
+                        message = getMessageError(e.error)
+                    }
+                }
+            }
+            Text(
+                text = message ?: stringResource(id = R.string.not_found_items),
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .testTag("NewsListEmptyState")
+                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .align(Alignment.Center),
+                color = Color.LightGray
+            )
+        } else Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MahsanTheme.colors.background)
+        ) {
+            LazyColumn(state = listState,
+                modifier = Modifier
+                    .wrapContentHeight()
+                    .fillMaxWidth()
+                    .background(MahsanTheme.colors.background)
+                    .padding(horizontal = LocalDim.current.spaceMedium)
+                    .align(Alignment.Center),
+                content = {
+                    items(items.itemCount) { index ->
+                        items[index]?.let {
+                            ShimmerListItem(isLoading = isLoading, contentAfterLoading = {
+                                NewsItem(it, onItemClicked = {
+                                    article = it
+                                    isBottomSheetVisible = true
+                                })
+                            })
+                        }
+                    }
+                })
+        }
+    }
+
 }

@@ -20,6 +20,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    //36c7e1cc0db246cd8ced3d42fec47522
     flavorDimensions = ["version"]
     productFlavors {
         production {
@@ -29,7 +30,7 @@ android {
         }
         develop {
             buildConfigField "String", "BASE_URL", "\"https://newsapi.org/v2/\""
-            buildConfigField "String", "API_KEY", "\"36c7e1cc0db246cd8ced3d42fec47522\""
+            buildConfigField "String", "API_KEY", "\"7c689a4b87e94b6394c7863e6245cf72\""
             dimension "version"
             applicationIdSuffix ".develop"
             versionNameSuffix "-develop"
@@ -41,6 +42,7 @@ android {
             minifyEnabled true
             shrinkResources  true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
@@ -67,51 +69,39 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.10.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    //Navigation Component
-    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
-
     //Compose
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
-    implementation 'androidx.activity:activity-compose:1.6.1'
-    implementation 'androidx.compose.material:material:1.3.1'
-    implementation "androidx.compose.ui:ui:$compose_ui_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
-//    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
-    implementation("io.coil-kt:coil-compose:2.2.2")
-    implementation "androidx.compose.runtime:runtime-livedata:$compose_ui_version"
-    implementation 'androidx.constraintlayout:constraintlayout-compose:1.0.1'
+    implementation 'androidx.activity:activity-compose:1.8.0'
+    implementation 'androidx.compose.material:material:1.5.3'
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     //Dagger - Hilt
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
 
+    //Navigation Component
+    implementation "androidx.navigation:navigation-compose:2.7.4"
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
+
     //Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
-
-    //Architectural Components
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.11.0"
 
     //Pagination
-    implementation "androidx.paging:paging-runtime:3.1.1"
-    implementation "androidx.paging:paging-compose:1.0.0-alpha17"
+    implementation "androidx.paging:paging-runtime-ktx:3.2.1"
+    implementation "androidx.paging:paging-compose:3.3.0-alpha02"
 
     //Bottom sheet
-    implementation 'androidx.compose.material3:material3:1.2.0-alpha02'
+    implementation 'androidx.compose.material3:material3:1.2.0-alpha09'
 
     // Local unit tests
     testImplementation "androidx.test:core:1.5.0"

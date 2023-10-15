@@ -36,7 +36,7 @@ import ir.mahsan.challenge.view.ui.theme.Shapes
 
 @Composable
 fun NewsItem(
-    item: Article? = null, onItemClicked: ((Article) -> Unit)? = null
+    item: Article, onItemClicked: (Article) -> Unit
 ) {
     Row(
         Modifier
@@ -45,11 +45,11 @@ fun NewsItem(
             .border(2.dp, MahsanTheme.colors.background)
             .padding(vertical = LocalDim.current.spaceSmall)
             .clickable {
-                item?.let { onItemClicked?.invoke(item) }
+                onItemClicked(item)
             }) {
 
         AsyncImage(
-            model = item?.urlToImage,
+            model = item.urlToImage,
             contentDescription = null,
             contentScale = ContentScale.Crop,
             error = painterResource(R.drawable.ic_place_holder),
@@ -67,7 +67,7 @@ fun NewsItem(
                 .align(CenterVertically)
         ) {
             Text(
-                text = item?.title ?: "",
+                text = item.title,
                 color = MahsanTheme.colors.title,
                 style = TextStyle(
                     fontWeight = FontWeight.Bold,
@@ -84,7 +84,7 @@ fun NewsItem(
 
             Row {
                 Text(
-                    text = getAuthorValue(item?.author),
+                    text = getAuthorValue(item.author),
                     color = MahsanTheme.colors.text,
                     fontSize = 12.sp,
                     style = TextStyle(
@@ -98,7 +98,7 @@ fun NewsItem(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
-                timeAgo(item?.publishedAt ?: "")?.let {
+                timeAgo(item.publishedAt)?.let {
                     Text(
                         text = it,
                         color = MahsanTheme.colors.text,
