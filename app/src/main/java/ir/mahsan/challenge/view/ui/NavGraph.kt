@@ -14,6 +14,6 @@ fun SetupNavGraph(
         navController = navController,
         startDestination = HOME_GRAPH_ROUTE,
     ) {
-        composable(HOME_GRAPH_ROUTE) { ListingScreen() }
+        composable(HOME_GRAPH_ROUTE) { NewsListScreen() }
     }
 }

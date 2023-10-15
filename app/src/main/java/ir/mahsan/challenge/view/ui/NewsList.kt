@@ -36,22 +36,7 @@ import ir.mahsan.challenge.view.ui.theme.MahsanTheme
 import ir.mahsan.challenge.viewmodel.MainViewModel
 import kotlinx.coroutines.delay
 
-@Composable
-fun ListingScreen(
-    viewModel: MainViewModel = hiltViewModel()
-) {
-    val items: LazyPagingItems<Article> = viewModel.getList().collectAsLazyPagingItems()
-    Column(
-        modifier = Modifier
-            .testTag("NewsList")
-            .fillMaxSize()
-            .background(Color.DarkGray)
-    ) {
-        Header(title = stringResource(R.string.title))
-        NewsList(items)
-    }
-}
-
+private lateinit var article: Article
 @Composable
 fun NewsList(
     items: LazyPagingItems<Article>,
@@ -64,7 +49,6 @@ fun NewsList(
         isLoading = items.itemCount == 0 && items.loadState.refresh == LoadState.Loading
     }
 
-    lateinit var article: Article
     var isBottomSheetVisible by remember { mutableStateOf(false) }
     if (isBottomSheetVisible) {
         BottomSheet(article) {
