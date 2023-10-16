@@ -4,7 +4,7 @@ import org.hamcrest.MatcherAssert
 import org.hamcrest.Matchers
 import org.junit.Test
 
-class GetAuthorUtiTest {
+class GetAuthorUtilTest {
 
     @Test
     fun getAuthor_null_returnsUnknownStr() {
