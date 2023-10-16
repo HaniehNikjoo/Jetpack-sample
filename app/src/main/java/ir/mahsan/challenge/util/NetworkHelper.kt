@@ -36,13 +36,13 @@ fun getOkHttpClient() = when {
 }
 
 fun getRetrofitClient(
-    BASE_URL: String,
+    baseUrl: String,
     okHttpClient: OkHttpClient,
 ): Retrofit = Retrofit.Builder().addConverterFactory(
     GsonConverterFactory.create(
         GsonBuilder().create()
     )
-).baseUrl(BASE_URL).client(okHttpClient).build()
+).baseUrl(baseUrl).client(okHttpClient).build()
 
 
 

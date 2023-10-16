@@ -98,9 +98,9 @@ fun NewsItem(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
-                timeAgo(item.publishedAt)?.let {
+                if(timeAgo(item.publishedAt).isNotEmpty()) {
                     Text(
-                        text = it,
+                        text = timeAgo(item.publishedAt),
                         color = MahsanTheme.colors.text,
                         style = TextStyle(
                             fontWeight = FontWeight.Normal

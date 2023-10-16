@@ -70,7 +70,7 @@ fun NewsDetail(item: Article) {
                 overflow = TextOverflow.Ellipsis
             )
             Text(
-                text = timeAgo(item.publishedAt) ?: "",
+                text = timeAgo(item.publishedAt),
                 color = MahsanTheme.colors.text,
                 style = TextStyle(
                     fontWeight = FontWeight.Normal

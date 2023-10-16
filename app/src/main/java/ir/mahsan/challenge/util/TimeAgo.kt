@@ -5,8 +5,8 @@ import java.text.ParseException
 import java.util.Date
 import java.util.concurrent.TimeUnit
 
-fun timeAgo(dataDate: String?): String? {
-    var convTime: String? = null
+fun timeAgo(dataDate: String?): String {
+    var convTime = ""
     val suffix = "Ago"
     try {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
@@ -35,6 +35,8 @@ fun timeAgo(dataDate: String?): String? {
             convTime = "$day Days $suffix"
         }
     } catch (e: ParseException) {
+        e.printStackTrace()
+    } catch (e: Exception) {
         e.printStackTrace()
     }
     return convTime
