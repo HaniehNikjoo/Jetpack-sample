@@ -5,13 +5,12 @@ import java.util.Date
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers
 import org.junit.Test
-import java.util.TimeZone
 
 class TimeAgoTest {
 
     @Test
     fun getTime_null_returnsEmptyStr() {
-        val time = ""
+        val time = null
 
         assertThat(timeAgo(time), Matchers.`is`(""))
     }
