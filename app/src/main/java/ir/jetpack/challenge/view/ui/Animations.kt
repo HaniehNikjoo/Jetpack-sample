@@ -1,23 +1,24 @@
 package ir.jetpack.challenge.view.ui
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateInt
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -51,7 +52,7 @@ fun Animations(navController: NavHostController) {
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
 
-    ) {
+        ) {
         Header(title = stringResource(R.string.animations))
 
         var isVisible by remember {
@@ -70,9 +71,11 @@ fun Animations(navController: NavHostController) {
                 .fillMaxWidth()
                 .weight(1f)
         ) {
-            Box(modifier = Modifier
-                .background(GeneralTheme.colors.primary)
-                .size(100.dp))
+            Box(
+                modifier = Modifier
+                    .background(GeneralTheme.colors.primary)
+                    .size(100.dp)
+            )
         }
 
         var isRound by remember {
@@ -114,6 +117,35 @@ fun Animations(navController: NavHostController) {
                     .background(GeneralTheme.colors.primary)
             )
         }
+
+        var isRound2 by remember {
+            mutableStateOf(false)
+        }
+        val transition = updateTransition(targetState = isRound2, label = "")
+        val borderRadius2 by transition.animateInt(
+            transitionSpec = { tween(2000) },
+            label = "borderRadius",
+            targetValueByState = { isRound ->
+                if (isRound) 100 else 0
+            }
+        )
+        val color by transition.animateColor(transitionSpec = { tween(1000) },
+            label = "color", targetValueByState = { isRound ->
+                if (isRound) Color.Red else GeneralTheme.colors.primary
+            })
+
+        Button(onClick = {
+            isRound2 = !isRound2
+        }) {
+            Text(text = "Transition")
+        }
+
+        Box(
+            modifier = Modifier
+                .size(100.dp)
+                .clip(RoundedCornerShape(borderRadius2))
+                .background(color)
+        )
 
     }
 }
