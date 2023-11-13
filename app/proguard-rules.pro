@@ -89,4 +89,4 @@
  # is used.
  -keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
 
--keepnames @kotlin.Metadata class ir.mahsan.challenge.model.dto.**
+-keepnames @kotlin.Metadata class ir.jetpack.challenge.model.dto.**

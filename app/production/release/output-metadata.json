@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "ir.mahsan.challenge",
+  "applicationId": "ir.jetpack.challenge",
   "variantName": "productionRelease",
   "elements": [
     {
