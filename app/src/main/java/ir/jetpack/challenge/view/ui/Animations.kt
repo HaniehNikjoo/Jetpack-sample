@@ -2,9 +2,12 @@ package ir.jetpack.challenge.view.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateInt
 import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
@@ -19,6 +22,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -133,19 +137,33 @@ fun Animations(navController: NavHostController) {
             label = "color", targetValueByState = { isRound ->
                 if (isRound) Color.Red else GeneralTheme.colors.primary
             })
-
         Button(onClick = {
             isRound2 = !isRound2
         }) {
             Text(text = "Transition")
         }
-
         Box(
             modifier = Modifier
                 .size(100.dp)
                 .clip(RoundedCornerShape(borderRadius2))
                 .background(color)
         )
+        Spacer(modifier = Modifier.height(10.dp))
+
+
+        val transition2 = rememberInfiniteTransition(label = "")
+        val color2 by transition2.animateColor(initialValue = GeneralTheme.colors.primary, targetValue = Color.Red, animationSpec = infiniteRepeatable(
+            animation = tween(2000),
+            repeatMode = RepeatMode.Restart
+        ),
+            label = ""
+        )
+        Box(
+            modifier = Modifier
+                .size(100.dp)
+                .background(color2)){
+                    Text(text = "Infinitive", modifier = Modifier.align(Alignment.Center), color = Color.White)
+                }
 
     }
 }
